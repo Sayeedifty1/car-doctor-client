@@ -4,18 +4,21 @@ import logo from '../../../../assets/logo.svg'
 import { AuthContext } from "../../../../providers/AuthProvider";
 
 const Navbar = () => {
-    const {user , logOut} = useContext(AuthContext);
+    const { user, logOut } = useContext(AuthContext);
 
-    const handleLogOut = ()=>{
+    const handleLogOut = () => {
         logOut()
-        .then(()=>{})
-        .catch(error => console.log(error))
+            .then(() => { })
+            .catch(error => console.log(error))
     }
     const navItems = <>
         <li><Link to="/">Home</Link> </li>
         <li> <Link to="/about">About</Link> </li>
-        {user?.email? <li><button onClick={handleLogOut}>Log out</button></li>: 
-        <li> <Link to="/login">LogIn</Link> </li>
+        {user?.email ? <>
+            <li> <Link to="/bookings">My bookings</Link> </li>
+            <li><button onClick={handleLogOut}>Log out</button></li>
+        </> :
+            <li> <Link to="/login">LogIn</Link> </li>
         }
     </>
     return (
