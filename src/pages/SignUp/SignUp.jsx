@@ -7,6 +7,7 @@ import { AuthContext } from '../../providers/AuthProvider';
 
 const SignUp = () => {
     const { createUser } = useContext(AuthContext);
+    console.log(createUser)
 
 
     const handleSignUp = event => {
@@ -23,9 +24,6 @@ const SignUp = () => {
                 console.log('created user', user)
             })
             .catch(error => console.log(error))
-
-
-
 
     }
 
