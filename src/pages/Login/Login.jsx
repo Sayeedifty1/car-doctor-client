@@ -1,10 +1,13 @@
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import img from '../../assets/images/login/login.svg'
 import { AuthContext } from '../../providers/AuthProvider';
 
 const Login = () => {
     const { signIn } = useContext(AuthContext);
+    const location = useLocation();
+    const navigate = useNavigate();
+    const from = location.state?.from?.pathname || '/';
 
 
     const handleLogin = event =>{
@@ -16,7 +19,27 @@ const Login = () => {
         signIn(email, password)
             .then(result => {
                 const user = result.user;
-                console.log(user);
+                const loggedUser = {
+                    email:user.email
+                    
+                }
+                console.log(loggedUser);
+                navigate(from , {replace: true});
+                fetch('http://localhost:3000/jwt', {
+                    method:"POST",
+                    headers:{
+                        'content-type' : 'application/json'
+                    },
+                    body: JSON.stringify(loggedUser)
+                })
+                .then(res=>res.json())
+                .then(data => {
+                    console.log('jwt response',data)
+                    // !waring : local storage is 2nd best place
+                    localStorage.setItem('car-access-token', data.token );
+                })
+
+
             })
             .catch(error => console.log(error));
     }
@@ -41,7 +64,7 @@ const Login = () => {
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
-                            <input type="text" name='password' placeholder="password" className="input input-bordered" />
+                            <input type="password" name='password' placeholder="password" className="input input-bordered" />
                             <label className="label">
                                 <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                             </label>
