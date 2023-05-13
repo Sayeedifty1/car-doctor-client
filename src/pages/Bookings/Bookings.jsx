@@ -9,7 +9,7 @@ const Bookings = () => {
     const [bookings, setBookings] = useState([]);
     const navigate = useNavigate();
 
-    const url = `http://localhost:3000/bookings?email=${user.email}`;
+    const url = `https://y-r6inkrm9x-sayeedifty1.vercel.app/bookings?email=${user.email}`;
     useEffect(() => {
         fetch(url,{
             method:"GET",
@@ -34,7 +34,7 @@ const Bookings = () => {
     const handleDelete = id => {
         const proceed = confirm('Are You sure you want to delete');
         if (proceed) {
-            fetch(`http://localhost:3000/bookings/${id}`, {
+            fetch(`https://y-r6inkrm9x-sayeedifty1.vercel.app/bookings/${id}`, {
                 method: 'DELETE'
             })
                 .then(res => res.json())
@@ -52,7 +52,7 @@ const Bookings = () => {
 
 
     const handleBookingConfirm = id => {
-        fetch(`http://localhost:3000/bookings/${id}`, {
+        fetch(`https://y-r6inkrm9x-sayeedifty1.vercel.app/bookings/${id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'

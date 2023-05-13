@@ -43,7 +43,7 @@ const AuthProvider = ({ children }) => {
                     email:user.email
                     
                 }
-                fetch('http://localhost:3000/jwt', {
+                fetch('https://y-r6inkrm9x-sayeedifty1.vercel.app/jwt', {
                     method:"POST",
                     headers:{
                         'content-type' : 'application/json'
