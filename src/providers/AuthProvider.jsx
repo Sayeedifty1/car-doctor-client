@@ -38,28 +38,28 @@ const AuthProvider = ({ children }) => {
             setUser(currentUser);
             console.log('current user', currentUser);
             setLoading(false);
-            if(currentUser && currentUser.email){
-                const loggedUser = {
-                    email:user.email
+            // if(currentUser && currentUser.email){
+            //     const loggedUser = {
+            //         email:user.email
                     
-                }
-                fetch('https://y-r6inkrm9x-sayeedifty1.vercel.app/jwt', {
-                    method:"POST",
-                    headers:{
-                        'content-type' : 'application/json'
-                    },
-                    body: JSON.stringify(loggedUser)
-                })
-                .then(res=>res.json())
-                .then(data => {
-                    console.log('jwt response',data)
-                    // !waring : local storage is 2nd best place
-                    localStorage.setItem('car-access-token', data.token );
-                })
-            }
-            else{
-                localStorage.removeItem('car-access-token');
-            }
+            //     }
+            //     fetch('https://localhost:3000/jwt', {
+            //         method:"POST",
+            //         headers:{
+            //             'content-type' : 'application/json'
+            //         },
+            //         body: JSON.stringify(loggedUser)
+            //     })
+            //     .then(res=>res.json())
+            //     .then(data => {
+            //         console.log('jwt response',data)
+            //         // !waring : local storage is 2nd best place
+            //         localStorage.setItem('car-access-token', data.token );
+            //     })
+            // }
+            // else{
+            //     localStorage.removeItem('car-access-token');
+            // }
         });
         return () => {
             return unsubscribe();
